@@ -1,0 +1,14 @@
+{
+  "name": "node-3d",
+  "version": "0.1.0",
+  "description": "A class for constructing nodes in space",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark Hintz <mark@interactivethings.com> (http://www.markhz.com)",
+  "license": "MIT",
+  "dependencies": {
+    "gl-matrix": "^2.3.1"
+  }
+}
