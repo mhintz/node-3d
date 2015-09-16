@@ -1,8 +1,6 @@
-
-
 var NodePrototype = {
 
-  is
+  // getId
 
   add: function add(child) {
 
@@ -41,45 +39,45 @@ var NodePrototype = {
     }
   },
 
-  sortChildren
-  getSortedChildren
+  // sortChildren
+  // getSortedChildren
 
   getTransform: function getTransform() {
 
   },
 
-  getPosition
-  getDistFrom
-  getOrientation
-  getScale
-  getXAxis
-  getYAxis
-  getZAxis
+  // getPosition
+  // getDistFrom
+  // getOrientation
+  // getScale
+  // getXAxis
+  // getYAxis
+  // getZAxis
 
   getGlobalTransform: function getGlobalTransform() {
 
   },
 
-  getGlobalPosition
-  getGlobalOrientation
-  getGlobalScale
+  // getGlobalPosition
+  // getGlobalOrientation
+  // getGlobalScale
 
-  updateTransform
-  setTransform
-  translate
-  translateX
-  translateY
-  translateZ
-  setPosition
-  rotate
-  rotateX
-  rotateY
-  rotateZ
-  rotateMat
-  setOrientation
-  lookAt
-  scale
-  setScale
+  // updateTransform
+  // setTransform
+  // translate
+  // translateX
+  // translateY
+  // translateZ
+  // setPosition
+  // rotate
+  // rotateX
+  // rotateY
+  // rotateZ
+  // rotateMat
+  // setOrientation
+  // lookAt
+  // scale
+  // setScale
 
 };
 
