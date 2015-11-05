@@ -146,7 +146,8 @@ Node3D.prototype = {
     var orientation = this.getOrientation();
 
     if (this.parent) {
-      return glm.quat.multiply(orientation, orientation, this.parent.getGlobalOrientation());
+      var withParent = glm.quat.multiply(orientation, orientation, this.parent.getGlobalOrientation());
+      return glm.quat.normalize(withParent, withParent);
     }
 
     return orientation;
@@ -156,7 +157,7 @@ Node3D.prototype = {
     var scale = this.getScale();
 
     if (this.parent) {
-      return glm.vec3.add(scale, scale, this.parent.getGlobalScale());
+      return glm.vec3.multiply(scale, scale, this.parent.getGlobalScale());
     }
 
     return scale;
