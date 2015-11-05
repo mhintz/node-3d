@@ -100,41 +100,54 @@ Node3D.prototype = {
     return this.getChildren().sort(func);
   },
 
+  // used for lazy calculations of the transform matrix
+  calcTransform: function() {
+    this.transform = glm.mat4.fromRotationTranslationScale(this.transform, this.orientation, this.position, this.scale);
+    return this;
+  },
+
   getTransform: function getTransform() {
-    this.transform = glm.mat4.fromRotationTranslationScale(glm.mat4.create(), this.orientation, this.position, this.scale);
+    // First calculates the transform, then returns a defensive clone of it
+    this.calcTransform();
     return glm.mat4.clone(this.transform);
   },
 
   getPosition: function getPosition() {
+    // Defensive clone
     return glm.vec3.clone(this.position);
   },
   
   getDistFrom: function getDistFrom(point) {
+    // Returns a number
     return glm.vec3.dist(this.position, point);
   },
 
   getOrientation: function getOrientation() {
-    var quatOrien = glm.quat.clone(this.orientation);
-    return glm.quat.normalize(quatOrien, quatOrien);
+    // Defensive clone
+    return glm.quat.clone(this.orientation);
   },
 
   getScale: function getScale() {
+    // Defensive clone
     return glm.vec3.clone(this.scale);
   },
 
   getXAxis: function getXAxis() {
     var xaxis = glm.vec3.fromValues(1, 0, 0);
-    return glm.vec3.transformQuat(xaxis, xaxis, this.getOrientation());
+    glm.vec3.transformQuat(xaxis, xaxis, this.getOrientation());
+    return glm.vec3.normalize(xaxis, xaxis);
   },
 
   getYAxis: function getYAxis() {
     var yaxis = glm.vec3.fromValues(0, 1, 0);
-    return glm.vec3.transformQuat(yaxis, yaxis, this.getOrientation());
+    glm.vec3.transformQuat(yaxis, yaxis, this.getOrientation());
+    return glm.vec3.normalize(yaxis, yaxis);
   },
 
   getZAxis: function getZAxis() {
     var zaxis = glm.vec3.fromValues(0, 0, 1);
-    return glm.vec3.transformQuat(zaxis, zaxis, this.getOrientation());
+    glm.vec3.transformQuat(zaxis, zaxis, this.getOrientation());
+    return glm.vec3.normalize(zaxis, zaxis);
   }
 
   getGlobalTransform: function getGlobalTransform() {
