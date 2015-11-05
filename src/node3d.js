@@ -191,24 +191,95 @@ Node3D.prototype = {
     return scale;
   },
 
-  // setTransform
+  setTransform: function setTransform(position, orientation, scale) {
+    this.position = glm.vec3.clone(position);
+    this.orientation = glm.quat.clone(orientation);
+    glm.quat.normalize(this.orientation, this.orientation);
+    this.scale = glm.vec3.clone(scale);
+    return this;
+  },
 
-  // translate
-  // translateX
-  // translateY
-  // translateZ
-  // setPosition
+  translate: function translate(amount) {
+    glm.vec3.add(this.position, this.position, amount);
+    return this;
+  },
 
-  // rotate
-  // rotateX
-  // rotateY
-  // rotateZ
-  // rotateMat
-  // setOrientation
-  // lookAt
+  // Translates along the local x axis
+  translateX: function translateX(amount) {
+    var localXAxis = this.getXAxis();
+    glm.vec3.scale(localXAxis, localXAxis, amount);
+    return this;
+  },
 
-  // scale
-  // setScale
+  // Translates along the local y axis
+  translateY: function translateY(amount) {
+    var localYAxis = this.getYAxis();
+    glm.vec3.scale(localYAxis, localYAxis, amount);
+    return this;
+  },
+
+  // Translates along the local z axis
+  translateZ: function translateZ(amount) {
+    var localZAxis = this.getZAxis();
+    glm.vec3.scale(localZAxis, localZAxis, amount);
+    return this;
+  },
+
+  setPosition: function setPosition(position) {
+    this.position = glm.vec3.clone(position);
+    return this;
+  },
+
+  rotateQuat: function rotateQuat(quat) {
+    glm.quat.multiply(this.orientation, this.orientation, quat);
+    glm.quat.normalize(this.orientation, this.orientation);
+    return this;
+  },
+
+  rotateX: function rotateX(xRadians) {
+    glm.quat.rotateX(this.orientation, this.orientation, xRadians);
+    glm.quat.normalize(this.orientation, this.orientation);
+    return this;
+  },
+
+  rotateY: function rotateY(yRadians) {
+    glm.quat.rotateY(this.orientation, this.orientation, yRadians);
+    glm.quat.normalize(this.orientation, this.orientation);
+    return this;
+  },
+
+  rotateZ: function rotateZ(zRadians) {
+    glm.quat.rotateZ(this.orientation, this.orientation, zRadians);
+    glm.quat.normalize(this.orientation, this.orientation);
+    return this;
+  },
+
+  rotateMat: function rotateMat(inputMat) {
+    var rotationMat = glm.mat3.fromMat4(glm.mat3.create(), inputMat);
+    var rotationQuat = glm.quat.fromMat3(glm.quat.create(), rotationMat);
+    glm.quat.normalize(rotationQuat, rotationQuat);
+    glm.quat.multiply(this.orientation, this.orientation, rotationQuat);
+    glm.quat.normalize(this.orientation, this.orientation);
+    return this;
+  },
+
+  setOrientation: function setOrientation(orientation) {
+    this.orientation = glm.quat.clone(orientation);
+    glm.quat.normalize(this.orientation, this.orientation);
+    return this;
+  },
+
+  // lookAt // TODO
+
+  scale: function scale(scaleVector) {
+    this.scale = glm.vec3.multiply(this.scale, this.scale, scaleVector);
+    return this;
+  },
+
+  setScale: function setScale(scaleVector) {
+    this.scale = glm.vec3.clone(scaleVector);
+    return this;
+  }
 
 };
 
