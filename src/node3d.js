@@ -25,6 +25,7 @@ Node3D.prototype = {
     return this.nodeId;
   },
 
+  // Expects the child to also be a node3d
   add: function add(child) {
     child.parent = this;
     this.childLookup[child.getId()] = this.children.length;
@@ -43,7 +44,14 @@ Node3D.prototype = {
   },
 
   getParent: function getParent() {
+    // Returns null if node is an orphan
     return this.parent;
+  },
+
+  getChild: function getChild(id) {
+    var index = this.childLookup[id];
+    // Returns null if the id isn't present
+    return this.children[index] || null;
   },
 
   getChildren: function getChildren() {
