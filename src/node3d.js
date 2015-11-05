@@ -51,8 +51,9 @@ Node3D.prototype = {
     return this.children.slice();
   },
 
+  // Traverses the children of this node, depth-first, and calls func on each one
   traverseDepth: function traverseDepth(func) {
-    func(this); // func this line
+    func(this);
 
     this.getChildren().forEach(function(child) {
       child.traverseDepth(func);
@@ -61,6 +62,7 @@ Node3D.prototype = {
     return this;
   },
 
+  // Traverses the children of this node, breadth-first, and calls func on each one
   traverseBreadth: function traverseBreadth(func) {
     var queue = [ this ];
 
@@ -68,7 +70,7 @@ Node3D.prototype = {
       var child = queue.pop();
       func(child);
 
-      queue = queue.concat(child.getChildren());
+      queue.push.apply(queue, child.getChildren());
     }
 
     return this;
