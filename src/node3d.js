@@ -77,8 +77,13 @@ Node3D.prototype = {
   },
 
   sortChildren: function sortChildren(func) {
-    // Actually sorts in place
+    // Sorts in place
     this.children.sort(func);
+    // Got to maintain the validity of the indices in the childLookup
+    this.childLookup = this.children.reduce(function(lookup, child, index) {
+      lookup[child.getId()] = index;
+      return lookup;
+    }, {});
     return this;
   },
 
