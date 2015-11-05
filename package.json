@@ -1,8 +1,8 @@
 {
-  "name": "node-3d",
+  "name": "gl-node-3d",
   "version": "0.1.0",
-  "description": "A class for constructing nodes in space",
-  "main": "index.js",
+  "description": "A container class for information about an object's position, orientation, and scale in 3D",
+  "main": "node3d.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
