@@ -1,14 +1,22 @@
 {
   "name": "gl-node-3d",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A container class for information about an object's position, orientation, and scale in 3D",
-  "main": "node3d.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "dist/node3d.js",
+  "types": "dist/node3d.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mhintz/node-3d"
   },
-  "author": "Mark Hintz <mark@interactivethings.com> (http://www.markhz.com)",
+  "author": "Mark Hintz (http://www.markhz.com)",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
-    "gl-matrix": "^2.3.1"
+    "gl-matrix": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/gl-matrix": "^2.4.0"
   }
 }

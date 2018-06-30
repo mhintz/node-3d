@@ -1,0 +1,52 @@
+/// <reference types="gl-matrix" />
+import { vec3, quat, mat4 } from 'gl-matrix';
+export default class Node3d {
+    nodeId: number;
+    position: vec3;
+    orientation: quat;
+    scale: vec3;
+    transform: mat4;
+    parent: Node3d | null;
+    children: {
+        [key: number]: Node3d;
+    };
+    constructor();
+    static NODE_UID: number;
+    static getuid(): number;
+    getId(): number;
+    add(child: Node3d): Node3d;
+    remove(child: Node3d): Node3d;
+    setParent(parent: Node3d): void;
+    getParent(): Node3d | null;
+    getChild(id: number): Node3d | null;
+    traverseDepthFirst(func: (child: Node3d) => void): Node3d;
+    traverseBreadthFirst(func: (child: Node3d) => void): Node3d;
+    private calcTransform();
+    getTransform(): mat4;
+    getPosition(): vec3;
+    getDistFrom(point: vec3): number;
+    getOrientation(): quat;
+    getScale(): vec3;
+    getXAxis(): vec3;
+    getYAxis(): vec3;
+    getZAxis(): vec3;
+    getGlobalTransform(): mat4;
+    getGlobalPosition(): vec3;
+    getGlobalOrientation(): quat;
+    getGlobalScale(): vec3;
+    setTransform(position: vec3, orientation: quat, scale: vec3): Node3d;
+    translate(factor: vec3): Node3d;
+    translateX(factor: number): Node3d;
+    translateY(factor: number): Node3d;
+    translateZ(factor: number): Node3d;
+    setPosition(position: vec3): Node3d;
+    rotateQuat(rotation: quat): Node3d;
+    rotateX(xRadians: number): Node3d;
+    rotateY(yRadians: number): Node3d;
+    rotateZ(zRadians: number): Node3d;
+    rotateMat(inputMat: mat4): Node3d;
+    setOrientation(orientation: quat): Node3d;
+    scaleBy(scaleVector: vec3): Node3d;
+    scaleMult(factor: number): Node3d;
+    setScale(scaleVector: vec3): Node3d;
+}
