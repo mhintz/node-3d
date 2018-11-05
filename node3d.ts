@@ -7,9 +7,9 @@ export default class Node3d {
   position: vec3;
   orientation: quat;
   scale: vec3;
-  transform: mat4;
   parent: Node3d | null;
   children: { [key: number]: Node3d };
+  private transform: mat4;
 
   constructor() {
     this.nodeId = Node3d.getuid();
