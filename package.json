@@ -12,7 +12,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "prepublish": "tsc"
+    "prepare": "tsc"
   },
   "dependencies": {
     "gl-matrix": "^2.6.1"
