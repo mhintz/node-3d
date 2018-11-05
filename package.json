@@ -11,7 +11,8 @@
   "author": "Mark Hintz (http://www.markhz.com)",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "tsc"
   },
   "dependencies": {
     "gl-matrix": "^2.6.1"
