@@ -11,6 +11,11 @@ var Node3d = /** @class */ (function () {
         this.parent = null;
         this.children = {};
     }
+    Node3d.prototype.clone = function () {
+        var cloned = new Node3d();
+        cloned.setTransform(this.position, this.orientation, this.scale);
+        return cloned;
+    };
     Node3d.getuid = function () {
         return ++Node3d.NODE_UID;
     };
@@ -86,17 +91,17 @@ var Node3d = /** @class */ (function () {
     };
     Node3d.prototype.getXAxis = function () {
         var xaxis = gl_matrix_1.vec3.fromValues(1, 0, 0);
-        gl_matrix_1.vec3.transformQuat(xaxis, xaxis, this.getOrientation());
+        gl_matrix_1.vec3.transformQuat(xaxis, xaxis, this.orientation);
         return gl_matrix_1.vec3.normalize(xaxis, xaxis);
     };
     Node3d.prototype.getYAxis = function () {
         var yaxis = gl_matrix_1.vec3.fromValues(0, 1, 0);
-        gl_matrix_1.vec3.transformQuat(yaxis, yaxis, this.getOrientation());
+        gl_matrix_1.vec3.transformQuat(yaxis, yaxis, this.orientation);
         return gl_matrix_1.vec3.normalize(yaxis, yaxis);
     };
     Node3d.prototype.getZAxis = function () {
         var zaxis = gl_matrix_1.vec3.fromValues(0, 0, 1);
-        gl_matrix_1.vec3.transformQuat(zaxis, zaxis, this.getOrientation());
+        gl_matrix_1.vec3.transformQuat(zaxis, zaxis, this.orientation);
         return gl_matrix_1.vec3.normalize(zaxis, zaxis);
     };
     Node3d.prototype.getGlobalTransform = function () {
@@ -116,8 +121,8 @@ var Node3d = /** @class */ (function () {
     Node3d.prototype.getGlobalOrientation = function () {
         var orientation = this.getOrientation();
         if (this.parent) {
-            var withParent = gl_matrix_1.quat.multiply(orientation, orientation, this.parent.getGlobalOrientation());
-            return gl_matrix_1.quat.normalize(withParent, withParent);
+            orientation = gl_matrix_1.quat.multiply(orientation, orientation, this.parent.getGlobalOrientation());
+            return gl_matrix_1.quat.normalize(orientation, orientation);
         }
         return orientation;
     };
@@ -143,19 +148,19 @@ var Node3d = /** @class */ (function () {
     Node3d.prototype.translateX = function (factor) {
         var localXAxis = this.getXAxis();
         gl_matrix_1.vec3.scale(localXAxis, localXAxis, factor);
-        return this;
+        return this.translate(localXAxis);
     };
     // Translates along the local y axis
     Node3d.prototype.translateY = function (factor) {
         var localYAxis = this.getYAxis();
         gl_matrix_1.vec3.scale(localYAxis, localYAxis, factor);
-        return this;
+        return this.translate(localYAxis);
     };
     // Translates along the local z axis
     Node3d.prototype.translateZ = function (factor) {
         var localZAxis = this.getZAxis();
         gl_matrix_1.vec3.scale(localZAxis, localZAxis, factor);
-        return this;
+        return this.translate(localZAxis);
     };
     Node3d.prototype.setPosition = function (position) {
         this.position = gl_matrix_1.vec3.clone(position);
@@ -195,6 +200,7 @@ var Node3d = /** @class */ (function () {
         return this;
     };
     // lookAt // TODO
+    // lookAt orients this object at a given position looking at a given other position
     Node3d.prototype.scaleBy = function (scaleVector) {
         this.scale = gl_matrix_1.vec3.multiply(this.scale, this.scale, scaleVector);
         return this;

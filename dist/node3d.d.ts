@@ -1,4 +1,3 @@
-/// <reference types="gl-matrix" />
 import { vec3, quat, mat4 } from 'gl-matrix';
 export default class Node3d {
     nodeId: number;
@@ -11,6 +10,7 @@ export default class Node3d {
         [key: number]: Node3d;
     };
     constructor();
+    clone(): Node3d;
     static NODE_UID: number;
     static getuid(): number;
     getId(): number;
@@ -21,7 +21,7 @@ export default class Node3d {
     getChild(id: number): Node3d | null;
     traverseDepthFirst(func: (child: Node3d) => void): Node3d;
     traverseBreadthFirst(func: (child: Node3d) => void): Node3d;
-    private calcTransform();
+    private calcTransform;
     getTransform(): mat4;
     getPosition(): vec3;
     getDistFrom(point: vec3): number;
