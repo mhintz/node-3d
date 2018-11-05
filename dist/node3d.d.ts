@@ -47,6 +47,7 @@ export default class Node3d {
     rotateZ(zRadians: number): Node3d;
     rotateMat(inputMat: mat4): Node3d;
     setOrientation(orientation: quat): Node3d;
+    setFromEuler(euler: vec3): Node3d;
     scaleBy(scaleVector: vec3): Node3d;
     scaleMult(factor: number): Node3d;
     setScale(scaleVector: vec3): Node3d;

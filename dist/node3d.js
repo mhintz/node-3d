@@ -204,6 +204,11 @@ var Node3d = /** @class */ (function () {
         gl_matrix_1.quat.normalize(this.orientation, this.orientation);
         return this;
     };
+    Node3d.prototype.setFromEuler = function (euler) {
+        this.orientation = gl_matrix_1.quat.fromEuler(this.orientation, euler[0], euler[1], euler[2]);
+        gl_matrix_1.quat.normalize(this.orientation, this.orientation);
+        return this;
+    };
     // lookAt // TODO
     // lookAt orients this object at a given position looking at a given other position
     Node3d.prototype.scaleBy = function (scaleVector) {

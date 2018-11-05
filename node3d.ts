@@ -268,6 +268,12 @@ export default class Node3d {
     return this;
   }
 
+  setFromEuler(euler: vec3): Node3d {
+    this.orientation = quat.fromEuler(this.orientation, euler[0], euler[1], euler[2]);
+    quat.normalize(this.orientation, this.orientation);
+    return this;
+  }
+
   // lookAt // TODO
   // lookAt orients this object at a given position looking at a given other position
 
