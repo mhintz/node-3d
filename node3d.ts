@@ -1,5 +1,7 @@
 import { vec3, quat, mat3, mat4 } from 'gl-matrix';
 
+const RAD_TO_DEG = 180 / Math.PI;
+
 export default class Node3d {
   nodeId: number;
   position: vec3;
@@ -268,8 +270,12 @@ export default class Node3d {
     return this;
   }
 
+  // uses quat.fromEuler, but assumes that the input is in radians, rather than degrees
   setFromEuler(euler: vec3): Node3d {
-    this.orientation = quat.fromEuler(this.orientation, euler[0], euler[1], euler[2]);
+    const degX = RAD_TO_DEG * euler[0];
+    const degY = RAD_TO_DEG * euler[1];
+    const degZ = RAD_TO_DEG * euler[2];
+    this.orientation = quat.fromEuler(this.orientation, degX, degY, degZ);
     quat.normalize(this.orientation, this.orientation);
     return this;
   }

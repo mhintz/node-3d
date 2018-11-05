@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var gl_matrix_1 = require("gl-matrix");
+var RAD_TO_DEG = 180 / Math.PI;
 var Node3d = /** @class */ (function () {
     function Node3d() {
         this.nodeId = Node3d.getuid();
@@ -204,8 +205,12 @@ var Node3d = /** @class */ (function () {
         gl_matrix_1.quat.normalize(this.orientation, this.orientation);
         return this;
     };
+    // uses quat.fromEuler, but assumes that the input is in radians, rather than degrees
     Node3d.prototype.setFromEuler = function (euler) {
-        this.orientation = gl_matrix_1.quat.fromEuler(this.orientation, euler[0], euler[1], euler[2]);
+        var degX = RAD_TO_DEG * euler[0];
+        var degY = RAD_TO_DEG * euler[1];
+        var degZ = RAD_TO_DEG * euler[2];
+        this.orientation = gl_matrix_1.quat.fromEuler(this.orientation, degX, degY, degZ);
         gl_matrix_1.quat.normalize(this.orientation, this.orientation);
         return this;
     };
