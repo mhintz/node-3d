@@ -21,6 +21,12 @@ export default class Node3d {
     this.children = {};
   }
 
+  clone(): Node3d {
+    const cloned = new Node3d();
+    cloned.setTransform(this.position, this.orientation, this.scale);
+    return cloned;
+  }
+
   /* Static methods */
 
   static NODE_UID = 0;
@@ -121,19 +127,19 @@ export default class Node3d {
 
   getXAxis(): vec3 {
     const xaxis = vec3.fromValues(1, 0, 0);
-    vec3.transformQuat(xaxis, xaxis, this.getOrientation());
+    vec3.transformQuat(xaxis, xaxis, this.orientation);
     return vec3.normalize(xaxis, xaxis);
   }
 
   getYAxis(): vec3 {
     const yaxis = vec3.fromValues(0, 1, 0);
-    vec3.transformQuat(yaxis, yaxis, this.getOrientation());
+    vec3.transformQuat(yaxis, yaxis, this.orientation);
     return vec3.normalize(yaxis, yaxis);
   }
 
   getZAxis(): vec3 {
     const zaxis = vec3.fromValues(0, 0, 1);
-    vec3.transformQuat(zaxis, zaxis, this.getOrientation());
+    vec3.transformQuat(zaxis, zaxis, this.orientation);
     return vec3.normalize(zaxis, zaxis);
   }
 
