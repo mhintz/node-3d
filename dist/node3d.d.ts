@@ -4,11 +4,11 @@ export default class Node3d {
     position: vec3;
     orientation: quat;
     scale: vec3;
-    transform: mat4;
     parent: Node3d | null;
     children: {
         [key: number]: Node3d;
     };
+    private transform;
     constructor();
     clone(): Node3d;
     copyFrom(other: Node3d): Node3d;
