@@ -1,6 +1,6 @@
 {
   "name": "gl-node-3d",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "A container class for information about an object's position, orientation, and scale in 3D",
   "main": "dist/node3d.js",
   "types": "dist/node3d.d.ts",
