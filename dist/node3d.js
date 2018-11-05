@@ -6,7 +6,7 @@ var Node3d = /** @class */ (function () {
         this.nodeId = Node3d.getuid();
         this.position = gl_matrix_1.vec3.create();
         this.orientation = gl_matrix_1.quat.create();
-        this.scale = gl_matrix_1.vec3.create();
+        this.scale = gl_matrix_1.vec3.fromValues(1, 1, 1);
         this.transform = gl_matrix_1.mat4.create();
         this.parent = null;
         this.children = {};
@@ -15,6 +15,11 @@ var Node3d = /** @class */ (function () {
         var cloned = new Node3d();
         cloned.setTransform(this.position, this.orientation, this.scale);
         return cloned;
+    };
+    Node3d.prototype.copyFrom = function (other) {
+        this.setTransform(other.position, other.orientation, other.scale);
+        this.calcTransform();
+        return this;
     };
     Node3d.getuid = function () {
         return ++Node3d.NODE_UID;

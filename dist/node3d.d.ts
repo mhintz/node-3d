@@ -11,6 +11,7 @@ export default class Node3d {
     };
     constructor();
     clone(): Node3d;
+    copyFrom(other: Node3d): Node3d;
     static NODE_UID: number;
     static getuid(): number;
     getId(): number;

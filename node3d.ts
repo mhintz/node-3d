@@ -14,7 +14,7 @@ export default class Node3d {
 
     this.position = vec3.create();
     this.orientation = quat.create();
-    this.scale = vec3.create();
+    this.scale = vec3.fromValues(1, 1, 1);
     this.transform = mat4.create();
 
     this.parent = null;
@@ -25,6 +25,12 @@ export default class Node3d {
     const cloned = new Node3d();
     cloned.setTransform(this.position, this.orientation, this.scale);
     return cloned;
+  }
+
+  copyFrom(other: Node3d): Node3d {
+    this.setTransform(other.position, other.orientation, other.scale);
+    this.calcTransform();
+    return this;
   }
 
   /* Static methods */
